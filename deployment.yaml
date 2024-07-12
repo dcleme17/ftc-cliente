@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: backend
+  name: cliente-backend
   labels:
     cloud.googleapis.com/location: southamerica-east1
   annotations:
@@ -22,8 +22,8 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: 197343799268-compute@developer.gserviceaccount.com
       containers:
-      - name: backend
-        image: southamerica-east1-docker.pkg.dev/oficina-facil-prd/cloud-run-source-deploy/backend:latest
+      - name: cliente-backend
+        image: southamerica-east1-docker.pkg.dev/oficina-facil-prd/cloud-run-source-deploy/cliente-backend:latest
         ports:
         - name: http1
           containerPort: 31300

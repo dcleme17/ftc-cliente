@@ -13,18 +13,6 @@
     {
       "name": "Cliente",
       "description": "APIs do domínio de Clientes"
-    },
-    {
-      "name": "Pedido",
-      "description": "APIs do domínio de Pedidos"
-    },
-    {
-      "name": "Produto",
-      "description": "APIs para gerenciamento de produtos"
-    },
-    {
-      "name": "Pagamento",
-      "description": "APIs do domínio de Pagamento"
     }
   ],
   "schemes": [
@@ -43,7 +31,7 @@
     "/api/health-check/v1": {
       "get": {
         "tags": [
-          "Pedido"
+          "Cliente"
         ],
         "summary": "Health Check da API",
         "description": "Health Check da API",
