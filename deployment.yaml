@@ -1,0 +1,63 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    cloud.googleapis.com/location: southamerica-east1
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/minScale: '0'
+    run.googleapis.com/max-surge: '0'
+spec:
+  template:
+    metadata:
+      labels:
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        run.googleapis.com/execution-environment: gen2
+        autoscaling.knative.dev/maxScale: '1'
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:     
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: 197343799268-compute@developer.gserviceaccount.com
+      containers:
+      - name: backend
+        image: southamerica-east1-docker.pkg.dev/oficina-facil-prd/cloud-run-source-deploy/backend:latest
+        ports:
+        - name: http1
+          containerPort: 31300
+        env:
+          - name: MERCADOPAGO_URL
+            value: https://api.mercadopago.com/
+          - name: MERCADOPAGO_USERID
+            value: "84967632"
+          - name: MERCADOPAGO_TOKEN
+            value: TEST-2407420594039251-030222-bec9539a6ba5cae720b4f6d07ad3bd7a-84967632
+          - name: MERCADOPAGO_POS
+            value: SUC001
+          - name: MERCADOPAGO_WEBHOOK_URL
+            value: http://fiap.com.br     
+          - name: SERVICE_ACCOUNT
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: GOOGLE_APPLICATION_CREDENTIALS          
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                key: latest
+                name: MONGODB_URL          
+        resources:
+          limits:
+            cpu: '1000m'
+            memory: '1Gi'
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 31300
+  traffic:
+  - percent: 100
+    latestRevision: true
