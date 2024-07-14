@@ -29,6 +29,46 @@ describe('ClienteService', () => {
     expect(result).toBe(cli);
   });
 
+  it('deveRetornarNullSeNaoEncontrarCliente', async () => {
+    //Given
+    const cpf = '12345678900';
+    clienteRepository.buscaUltimaVersao.mockResolvedValue(null);
+
+    //When
+    const result = await clienteService.buscaUltimaVersao(cpf);
+
+    //Then
+    expect(clienteRepository.buscaUltimaVersao).toHaveBeenCalledTimes(1);
+    expect(clienteRepository.buscaUltimaVersao).toHaveBeenCalledWith(cpf);
+    expect(result).toBeNull();
+  });
+
+  it('deveRetornarErroAobuscaUltimaVersao', async () => {
+    //Given
+    const cpf = '12345678900';
+
+    //When
+    clienteRepository.buscaUltimaVersao.mockRejectedValue(new Error('Erro no método buscaUltimaVersao'));
+
+    //Then
+    await expect(clienteService.buscaUltimaVersao(cpf)).rejects.toThrow('Erro no método buscaUltimaVersao');
+  });
+
+  it('deveRetornarNullParaCpfInvalido', async () => {
+    //Given
+    const cpf = 'invalid_cpf';
+    clienteRepository.buscaUltimaVersao.mockResolvedValue(null);
+
+    //When
+    const result = await clienteService.buscaUltimaVersao(cpf);
+
+    //Then
+    expect(clienteRepository.buscaUltimaVersao).toHaveBeenCalledTimes(1);
+    expect(clienteRepository.buscaUltimaVersao).toHaveBeenCalledWith(cpf);
+    expect(result).toBeNull();
+});
+
+
   it('devePermitirAdicionarCliente', async () => {
 
     //Given
