@@ -45,6 +45,68 @@ export class ClienteUseCases {
         return await this.database.atualiza(cliente).then()
     }
 
+    async inutilizar(nome : string, cpf: string, email: string) {
+
+        try {
+
+            if(cpf) {
+                const clientes = await this.database.buscaPorParametro(cpf); 
+                for (const cli of clientes ) {
+                    let cpfAnonimizado = "***********";
+                    if (cli.getCpf().length > 11)
+                      cpfAnonimizado = "**************";
+                     
+                    await this.atualiza( 
+                        new Cliente(
+                            cpfAnonimizado,
+                            cli?.getNome(),
+                            cli?.getEmail(),
+                            cli?.getIdentity(),
+                            cli?.getVersao()
+                        )
+                    );
+                }
+            }
+    
+            if(nome) {
+                const clientes = await this.database.buscaPorParametro(nome);
+                for (const cli of clientes ) {
+                    let nomeAnonimizado = "RETIRADO";
+                    await this.atualiza( 
+                        new Cliente(
+                            cli?.getCpf(),
+                            nomeAnonimizado,
+                            cli?.getEmail(),
+                            cli?.getIdentity(),
+                            cli?.getVersao()
+                        )
+                    );
+                }
+            }
+    
+            if(email) {
+                const clientes = await this.database.buscaPorParametro(email);
+                for (const cli of clientes ) {
+                    let emailAnonimizado = "RETIRADO@RETIRADO.COM.BR";
+                    await this.atualiza( 
+                        new Cliente(
+                            cli?.getCpf(),
+                            emailAnonimizado,
+                            cli?.getEmail(),
+                            cli?.getIdentity(),
+                            cli?.getVersao()
+                        )
+                    );
+                }
+            }
+
+        } catch(error) {
+            throw new CustomError('Ocorreu um erro ao atualizar', 400, false, [])
+        }
+
+        return;
+    }
+
     async buscaUltimaVersao(cpf: string): Promise<Cliente> {
 
         const ultimaVersao = await this.database.buscaUltimaVersao(cpf)

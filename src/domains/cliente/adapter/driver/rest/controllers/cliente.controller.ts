@@ -94,4 +94,25 @@ export class ClienteController {
             next(new CustomError('Ops, algo deu errado na operação', 500, false, err))
         }        
     }
+
+    async inativacao(request: Request, next: NextFunction): Promise<void> {
+        try {
+            const result = validationResult(request)
+
+            if (!result.isEmpty()) {
+                throw new CustomError('Parâmetros inválidos. Por favor, verifique as informações enviadas.', 400, false, result.array())
+            }
+        
+            const {nome, cpf, email} = request.body
+
+            if(!nome && !cpf && !email) {
+                throw new CustomError('Preencha ao menos um dos parâmetros. Por favor, verifique as informações enviadas.', 400, false, result.array())
+            }          
+
+            next( new CustomResponse(200, 'Informações inativado', await this.service.inutilizar(nome, cpf, email)))
+        } catch (err){
+            next(new CustomError('Ops, algo deu errado na operação', 500, false, err))
+        }
+        
+    }
 }

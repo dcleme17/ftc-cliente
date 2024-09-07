@@ -61,5 +61,34 @@ export class ClienteDatabase extends MongoDB implements ICliente {
                 data?._id.getTimestamp()
             )
         )
-    }     
+    }    
+    
+    
+    async buscaPorParametro(parametro: string): Promise<Array<Cliente>>{
+
+        const clienteRef = await this.getCollection('lanchonete', 'clientes').then()
+
+        const cursor = clienteRef.find( 
+            { $and: 
+                [ {parametro}] 
+            }
+        )
+
+        let data = [];
+
+        for await (const doc of cursor) {
+            data.push(new Cliente(
+                doc?.cpf,
+                doc?.nome,
+                doc?.email,
+                doc?.identity,
+                new ClienteVersao(
+                    doc?._id.toString(),
+                    doc?._id.getTimestamp()
+                ))
+            )
+        }
+
+        return data;
+    }    
 }

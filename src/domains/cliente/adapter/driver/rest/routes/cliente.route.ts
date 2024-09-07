@@ -163,4 +163,35 @@ router.get('/v1',
   controller.buscaAutenticado(request, next).then()
 });
 
+
+router.put('/v1/lgpd',
+  body('nome').trim().isLength({ min: 11, max: 11 }),
+  body('cpf').trim(),
+  body('email').trim().isEmail(),
+  (request: Request, _response: Response, next: NextFunction) => {
+
+    /**
+        @Swagger
+        #swagger.auto = true
+        #swagger.summary = 'Altera os dados dos clientes para atender ao LGPD'
+        #swagger.description = 'Altera os dados dos clientes para atender ao LGPD'
+        #swagger.operationId = 'lgpd'
+        #swagger.deprecated = false
+        #swagger.security = [{
+          "JWT": []
+        }]        
+        #swagger.tags = ['Cliente']
+    */    
+
+    const database = new ClienteDatabase();
+    const identity = new Identity();
+    const service = new ClienteUseCases(
+      database, 
+      identity
+    )
+    const controller = new ClienteController(service)
+    console.log("ACESSOROUTE -> CLIENTE LGPD")
+    controller.inativacao(request, next).then()
+  });
+
 export default router;
