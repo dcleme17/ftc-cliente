@@ -1,7 +1,8 @@
 import {
     post_cliente, 
     put_cliente,
-    post_cliente_autenticacao
+    post_cliente_autenticacao,
+    put_cliente_lgpd
 
 } from 'domains/cliente/adapter/driver/rest/swagger/acesso.swagger'
 
@@ -25,6 +26,7 @@ export const swagger = {
         post_cliente,
         put_cliente,
         post_cliente_autenticacao,
+        put_cliente_lgpd
     },
     securityDefinitions: {
         JWT: {

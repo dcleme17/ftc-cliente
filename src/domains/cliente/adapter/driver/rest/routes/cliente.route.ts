@@ -181,6 +181,10 @@ router.put('/v1/lgpd',
           "JWT": []
         }]        
         #swagger.tags = ['Cliente']
+        #swagger.parameters['body'] = { 
+              in: 'body', 
+              'schema': { $ref: '#/definitions/put_cliente_lgpd' }
+      }      
     */    
 
     const database = new ClienteDatabase();
