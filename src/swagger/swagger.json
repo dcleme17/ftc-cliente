@@ -31,7 +31,7 @@
     "/api/health-check/v1": {
       "get": {
         "tags": [
-          "Cliente"
+          "Pedido"
         ],
         "summary": "Health Check da API",
         "description": "Health Check da API",
@@ -190,6 +190,36 @@
         ],
         "deprecated": false
       }
+    },
+    "/api/clientes/v1/lgpd": {
+      "put": {
+        "tags": [
+          "Cliente"
+        ],
+        "summary": "Altera os dados dos clientes para atender ao LGPD",
+        "description": "Altera os dados dos clientes para atender ao LGPD",
+        "operationId": "lgpd",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/put_cliente_lgpd"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -245,6 +275,28 @@
         }
       },
       "required": [
+        "cpf",
+        "email"
+      ]
+    },
+    "put_cliente_lgpd": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Teste Teste"
+        },
+        "cpf": {
+          "type": "string",
+          "example": "12345678909"
+        },
+        "email": {
+          "type": "string",
+          "example": "teste@teste.com"
+        }
+      },
+      "required": [
+        "nome",
         "cpf",
         "email"
       ]

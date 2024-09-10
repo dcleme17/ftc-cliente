@@ -11,3 +11,8 @@ export const put_cliente = {
     $nome: "Daniel CLmente",
     $email: "dcleme17@gmail.com"
 }
+export const put_cliente_lgpd = {
+        $nome: "Teste Teste",
+        $cpf: "12345678909",
+        $email: "teste@teste.com"
+}
