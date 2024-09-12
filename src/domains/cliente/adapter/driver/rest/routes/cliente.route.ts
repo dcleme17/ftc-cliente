@@ -164,8 +164,8 @@ router.get('/v1',
 });
 
 
-router.put('/v1/lgpd',
-  body('nome').trim().isLength({ min: 11, max: 11 }),
+router.post('/v1/lgpd',
+  body('nome').trim(),
   body('cpf').trim(),
   body('email').trim().isEmail(),
   (request: Request, _response: Response, next: NextFunction) => {
