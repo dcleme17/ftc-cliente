@@ -7,10 +7,12 @@
     "dev": "tsx watch src/application",
     "start": "tsx src/application",
     "swagger": "tsx src/swagger.ts",
-    "build": "tsc ",
     "lint": "eslint -c .ts src",
     "lint:fix": "eslint --ext .ts src --fix",
-    "test": "jest"
+    "test": "jest",
+    "build": "gcloud builds submit --tag southamerica-east1-docker.pkg.dev/fiap-tech-challenge-5soat/fiap-docker/cliente-backend:latest",
+    "deploy": "gcloud run services replace deployment.yaml",
+    "policy": "gcloud run services set-iam-policy cliente-backend policy.yaml"
   },
   "keywords": [],
   "author": "Ciro Oshiro, Daniel Clemente, Eliane Yumi",
