@@ -167,7 +167,7 @@ router.get('/v1',
 router.post('/v1/lgpd',
   body('nome').trim(),
   body('cpf').trim(),
-  body('email').trim().isEmail(),
+  body('email').trim(),
   (request: Request, _response: Response, next: NextFunction) => {
 
     /**
@@ -183,7 +183,7 @@ router.post('/v1/lgpd',
         #swagger.tags = ['Cliente']
         #swagger.parameters['body'] = { 
               in: 'body', 
-              'schema': { $ref: '#/definitions/put_cliente_lgpd' }
+              'schema': { $ref: '#/definitions/post_cliente_lgpd' }
       }      
     */    
 

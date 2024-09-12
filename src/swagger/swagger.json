@@ -204,7 +204,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/put_cliente_lgpd"
+              "$ref": "#/definitions/post_cliente_lgpd"
             }
           }
         ],
