@@ -183,7 +183,7 @@ router.post('/v1/lgpd',
         #swagger.tags = ['Cliente']
         #swagger.parameters['body'] = { 
               in: 'body', 
-              'schema': { $ref: '#/definitions/put_cliente_lgpd' }
+              'schema': { $ref: '#/definitions/post_cliente_lgpd' }
       }      
     */    
 
