@@ -6,7 +6,7 @@
     "description": "Conjuntos dde recursos e operações do Tech Challenge da FIAP"
   },
   "host": [
-    "backend-koxvlyfy2a-rj.a.run.app"
+    "localhost:31300"
   ],
   "basePath": "/",
   "tags": [
@@ -192,7 +192,7 @@
       }
     },
     "/api/clientes/v1/lgpd": {
-      "put": {
+      "post": {
         "tags": [
           "Cliente"
         ],
@@ -279,7 +279,7 @@
         "email"
       ]
     },
-    "put_cliente_lgpd": {
+    "post_cliente_lgpd": {
       "type": "object",
       "properties": {
         "nome": {

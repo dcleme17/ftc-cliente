@@ -2,7 +2,7 @@ import {
     post_cliente, 
     put_cliente,
     post_cliente_autenticacao,
-    put_cliente_lgpd
+    post_cliente_lgpd
 
 } from 'domains/cliente/adapter/driver/rest/swagger/acesso.swagger'
 
@@ -13,8 +13,8 @@ export const swagger = {
         title: 'Tech Challenge Fiap',              
         description: 'Conjuntos dde recursos e operações do Tech Challenge da FIAP'
     },
-    host: ["backend-koxvlyfy2a-rj.a.run.app"],
-    // host: ["localhost:31300"],
+    //host: ["backend-koxvlyfy2a-rj.a.run.app"],
+    host: ["localhost:31300"],
     schemes: ["https", "http"],
     tags: [                   
         {
@@ -26,7 +26,7 @@ export const swagger = {
         post_cliente,
         put_cliente,
         post_cliente_autenticacao,
-        put_cliente_lgpd
+        post_cliente_lgpd
     },
     securityDefinitions: {
         JWT: {
@@ -37,7 +37,7 @@ export const swagger = {
         }
     },
     "x-google-backend": {
-        "address": "https://backend-koxvlyfy2a-rj.a.run.app",
+        "address": "https://backend-koxvlyfy2a-rj.a.run.app", 
         "jwt_audience": "https://backend-koxvlyfy2a-rj.a.run.app"
     },        
 }
