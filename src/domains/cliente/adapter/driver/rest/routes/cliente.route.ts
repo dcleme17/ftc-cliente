@@ -167,7 +167,7 @@ router.get('/v1',
 router.post('/v1/lgpd',
   body('nome').trim(),
   body('cpf').trim(),
-  body('email').trim().isEmail(),
+  body('email').trim(),
   (request: Request, _response: Response, next: NextFunction) => {
 
     /**
